@@ -76,7 +76,10 @@ namespace ProjectPlugin
                 var moduledef = ModuleDefMD.Load(ofd.FileName);
                 foreach(var plugin in PluginToggles.Values)
                 {
-                    plugin.DoObfuscation(ref moduledef);
+                    if (plugin.Enabled)
+                    {
+                        plugin.DoObfuscation(ref moduledef);
+                    }
                 }
                 ofd.CheckFileExists = false;
                 ofd.ShowDialog();
